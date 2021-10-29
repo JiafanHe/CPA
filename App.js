@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { StyleSheet, Text, View, Button, Image, TextInput, SafeAreaView} from 'react-native';
+import { StyleSheet, Text, View, Button, Image, TextInput, SafeAreaView, ScrollView} from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 
 
 
@@ -81,10 +80,8 @@ function HomeScreen() {
   };
 
 
-
-
   return (
-
+    <ScrollView>
       <View style={styles.container}>
 
         <View style={styles.introduce}>
@@ -116,7 +113,7 @@ function HomeScreen() {
             <Text style={styles.parameter}>P : </Text>
             <TextInput
               style={styles.parameter}
-              placeholder="Value of P"
+              placeholder="/"
               onChangeText={text =>{
                 setInputP(text)
                 setP(parseFloat(text))
@@ -127,7 +124,7 @@ function HomeScreen() {
             <Text style={styles.parameter}>L : </Text>
             <TextInput
               style={styles.parameter}
-              placeholder="Value of L"
+              placeholder="/"
               onChangeText={text =>{
                 setL(parseFloat(text))
                 setInputL(text)
@@ -160,7 +157,7 @@ function HomeScreen() {
             <Text style={styles.parameter}>w : </Text>
             <TextInput
               style={styles.parameter}
-              placeholder="Value of w"
+              placeholder="/"
               onChangeText={text =>{
                 setw(parseFloat(text))
                 setInputw(text)
@@ -171,7 +168,7 @@ function HomeScreen() {
             <Text style={styles.parameter}>L : </Text>
             <TextInput
               style={styles.parameter}
-              placeholder="Value of L"
+              placeholder="/"
               onChangeText={text =>{
                 setL(parseFloat(text))
                 setInputL(text)
@@ -193,13 +190,13 @@ function HomeScreen() {
           </View>
 
           <View style={styles.output}>
-            <Text style={styles.parameter}>L : {L}</Text>
-            <Text style={styles.parameter}>P : {P}</Text>
-            <Text style={styles.parameter}>w : {w}</Text>
-            <Text style={styles.parameter}>f_1y : {f_1y}</Text>
-            <Text style={styles.parameter}>m_1 : {m_1}</Text>
-            <Text style={styles.parameter}>f_2y : {f_2y}</Text>
-            <Text style={styles.parameter}>m_2 : {m_2}</Text>
+            <Text style={styles.outputParameter}>L : {L}</Text>
+            <Text style={styles.outputParameter}>P : {P}</Text>
+            <Text style={styles.outputParameter}>w : {w}</Text>
+            <Text style={styles.outputParameter}>f_1y : {f_1y}</Text>
+            <Text style={styles.outputParameter}>m_1 : {m_1}</Text>
+            <Text style={styles.outputParameter}>f_2y : {f_2y}</Text>
+            <Text style={styles.outputParameter}>m_2 : {m_2}</Text>
           </View>
 
           <View style={styles.dataButton}>
@@ -230,13 +227,14 @@ function HomeScreen() {
 
       </View>
 
+    </ScrollView>
   );
 };
 
 function AboutScreen(){
   return(
     <View>
-      <Text>Hello, I'm Jiafan He. This app is designed for civil engineers.🔥 </Text>
+      <Text style={{marginTop:40,fontSize:20}}>Hello, I'm Jiafan He. This app is designed for civil engineers.🔥 </Text>
     </View>
   )
 }
@@ -244,7 +242,7 @@ function AboutScreen(){
 function OthersScreen(){
   return(
     <View>
-      <Text>To be continued...</Text>
+      <Text style={{marginTop:40,fontSize:20}}>To be continued...</Text>
     </View>
   )
 }
@@ -255,7 +253,9 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator
+        screenOptions={{headerShown:false}}
+      >
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="About" component={AboutScreen} />
         <Tab.Screen name="Others" component={OthersScreen} />
@@ -279,50 +279,60 @@ const styles = StyleSheet.create({
     backgroundColor: '#6D8299',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingBottom:'3%'
   },
   introText: {
-    fontSize:25,
+    width:'70%',
+    fontSize:20,
     fontWeight:"bold",
     color:'#fff',
-    marginBottom:30,
+    paddingTop:'20%',
+    marginBottom: '0%'
   },
   introImage:{
-    height:180,
-    width:500,
-    resizeMode: 'stretch',
+    height:'50%',
+    width:'50%',
+    resizeMode: 'center',
+    paddingBottom:'20%'
   },
   body:{
-    flex: 7,
+    flex: 10,
     width:'70%',
     backgroundColor: '#fff',
     flexDirection:'column',
   },
   bodyHeading:{
     fontWeight:"bold",
-    fontSize:20,
-    marginTop:40,
+    fontSize:18,
+    marginTop:20,
   },
   loadingImage:{
-    height:150,
-    width:500,
+    height:75,
+    width:250,
     resizeMode: 'stretch',
-    marginTop:20,
+    marginTop:15,
   },
   input:{
     flexDirection:'row',
-    marginBottom: 30,
+    marginBottom: 15,
   },
   parameter:{
     flex:1,
-    fontSize:20,
+    fontSize:18,
+  },
+  outputParameter:{
+    flex:1,
+    fontSize:18,
+    marginRight:20
   },
   output:{
-    marginTop:30,
-    flexDirection:'row',
+    marginTop:5,
+    flexDirection:'column',
     alignItems: 'center',
     justifyContent: 'center',
   },
   dataButton:{
-    marginTop:30,
+    marginTop:15,
+    marginBottom:15
   }
 });
